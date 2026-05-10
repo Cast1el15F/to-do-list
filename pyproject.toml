@@ -27,3 +27,37 @@ dependencies = [
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+
+[tool.ruff]
+line-length = 88
+target-version = "py314"
+
+exclude = [
+    ".git",
+    ".venv",
+    "__pycache__",
+    "alembic/versions",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "F",   # pyflakes
+    "I",   # isort
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+    "SIM", # simplify
+]
+
+ignore = [
+    "B008", # Depends(), Query() и т.д. в FastAPI
+]
+
+[tool.ruff.lint.per-file-ignores]
+"alembic/env.py" = ["F401"]
+"tests/*" = ["S101"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
