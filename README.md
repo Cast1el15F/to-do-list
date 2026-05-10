@@ -32,7 +32,7 @@
 
 1. Клонируйте репозиторий:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Cast1el15F/to-do-list.git
    cd to-do-list
    ```
 
