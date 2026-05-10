@@ -1,0 +1,17 @@
+[
+    {
+        "name": "string0",
+        "description": "string000",
+        "status": "новая"
+    },
+    {
+        "name": "string1",
+        "description": "string111",
+        "status": "новая"
+    },
+    {
+        "name": "string2",
+        "description": "string222",
+        "status": "новая"
+    }
+]
