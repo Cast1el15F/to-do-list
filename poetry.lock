@@ -248,17 +248,6 @@ idna = ">=2.8"
 trio = ["trio (>=0.32.0)"]
 
 [[package]]
-name = "argon2"
-version = "0.1.10"
-description = "Bindings for the argon2 password hasher"
-optional = false
-python-versions = "*"
-groups = ["main"]
-files = [
-    {file = "argon2-0.1.10.tar.gz", hash = "sha256:523a3d3b88f3a46244b4976a6ca81994705848538bbe9e41426ea54ccb75eb90"},
-]
-
-[[package]]
 name = "argon2-cffi"
 version = "25.1.0"
 description = "Argon2 for Python"
@@ -3060,4 +3049,4 @@ propcache = ">=0.2.1"
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.14"
-content-hash = "dc3d0f52fd284e9e234fbb9b3d666957c3b3b09263e44b7e363256c32a2579d8"
+content-hash = "5347552b823b3cfdc33b37d7092d8c6320209c32c0460df6dd9137cb0f4f86c0"
