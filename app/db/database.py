@@ -1,6 +1,6 @@
 """База, engine и sessionmaker"""
 
-from sqlalchemy import Integer, NullPool
+from sqlalchemy import Integer, NullPool, String
 from sqlalchemy.ext.asyncio import (
     AsyncAttrs,
     AsyncSession,
@@ -30,3 +30,4 @@ class Base(AsyncAttrs, DeclarativeBase):
     __abstract__ = True
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    name: Mapped[str] = mapped_column(String, nullable=False)

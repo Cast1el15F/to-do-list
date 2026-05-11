@@ -10,7 +10,7 @@ import asyncio
 from httpx import ASGITransport, AsyncClient
 from main import app as fastapi_app
 
-from app.db.models.users import Users
+from app.models.users import Users
 
 os.environ["mode"] = "test"
 

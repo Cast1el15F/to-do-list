@@ -4,8 +4,8 @@ from sqlalchemy.exc import IntegrityError
 from fastapi import HTTPException
 from sqlalchemy import insert, select
 from app.db.database import async_session_maker
-from app.api.models.user import UserSchema
-from app.api.models.tasks import TaskSchema
+from app.schemas.user import UserSchema
+from app.schemas.tasks import TaskSchema
 
 
 class BaseDAO:
@@ -19,7 +19,8 @@ class BaseDAO:
         async with async_session_maker() as session:
             query = select(cls.model)
             result = await session.execute(query)
-            return result.scalars().all()
+            result = result.scalars().all()
+            return result
 
     @classmethod
     async def find_by_filter(cls, **filter_by) -> list[UserSchema | TaskSchema]:
@@ -30,9 +31,7 @@ class BaseDAO:
             return result.scalars().all()
 
     @classmethod
-    async def find_one_or_none(
-        cls, **filter_by
-    ) -> list[UserSchema | TaskSchema] | None:
+    async def find_one_or_none(cls, **filter_by) -> list[UserSchema | TaskSchema] | str:
         """Возвращает объект из бд по фильтрам или не возвращает ничего"""
         async with async_session_maker() as session:
             query = select(cls.model).filter_by(**filter_by)
@@ -40,7 +39,7 @@ class BaseDAO:
             return result.scalar_one_or_none()
 
     @classmethod
-    async def add(cls, **data) -> None:
+    async def add(cls, **data) -> str:
         """Добавляет объект в бд"""
         try:
             async with async_session_maker() as session:
@@ -49,9 +48,10 @@ class BaseDAO:
                 await session.commit()
         except IntegrityError:
             raise HTTPException(status_code=409, detail="Пользователь существует")
+        return "success"
 
     @classmethod
-    async def delete(cls, **filter_by) -> None:
+    async def delete(cls, **filter_by) -> str:
         """
         Удаляет данные по фильтрам.
         Можно удалить лишнее, поэтому указывать только уникальные данные(id, email(для пользователей), name(для тасков))
@@ -69,3 +69,4 @@ class BaseDAO:
 
             await session.delete(data)
             await session.commit()
+            return "success"

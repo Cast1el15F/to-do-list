@@ -1,9 +1,11 @@
 """Управление таблицей tasks"""
 
+from fastapi import HTTPException
 from sqlalchemy import select
 
+from app.schemas.tasks import TaskSchema
 from app.db.dao.base_dao import BaseDAO
-from app.db.models.tasks import Status, Tasks
+from app.models.tasks import Tasks
 from app.db.database import async_session_maker
 
 
@@ -19,10 +21,10 @@ class TasksDAO(BaseDAO):
         id: int | None = None,
         name: str | None = None,
         description: str | None = None,
-        status: Status | None = None,
-    ):
-        """Обновляет пользователя по id или по имени"""
-        if id is None and name is None:
+        status: str | None = None,
+    ) -> TaskSchema:
+        """Обновляет задачу по id"""
+        if id is None:
             return None
 
         async with async_session_maker() as session:
@@ -30,10 +32,8 @@ class TasksDAO(BaseDAO):
             if id is not None:
                 task = await session.get(cls.model, id)
 
-            if task is None and name is not None:
-                query = select(cls.model).filter_by(name=name, user_id=user_id)
-                result = await session.execute(query)
-                task = result.scalar_one_or_none()
+            if task.user_id != user_id:
+                raise HTTPException(status_code=404, detail="У вас нет такой задачи")
 
             if task is None:
                 return None
@@ -48,3 +48,4 @@ class TasksDAO(BaseDAO):
 
             await session.commit()
             await session.refresh(task)
+            return task

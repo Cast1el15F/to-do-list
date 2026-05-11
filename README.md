@@ -127,3 +127,57 @@ pytest
 ```bash
 pytest tests/unit_tests/test_endpoints.py::test_logout_clears_cookie
 ```
+
+# Docker запуск
+
+## Сборка Docker-образа
+
+```bash
+docker build -t to-do-list .
+```
+
+---
+
+## Запуск контейнера
+
+```bash
+docker run -p 8000:8000 to-do-list
+```
+
+После запуска приложение будет доступно по адресу:
+
+```text
+http://localhost:8000
+```
+
+---
+
+## Swagger документация
+
+FastAPI автоматически предоставляет Swagger UI:
+
+```text
+http://localhost:8000/docs
+```
+
+ReDoc:
+
+```text
+http://localhost:8000/redoc
+```
+
+---
+
+## Остановка контейнера
+
+Сначала посмотрите ID контейнера:
+
+```bash
+docker ps
+```
+
+Затем остановите контейнер:
+
+```bash
+docker stop <container_id>
+```
