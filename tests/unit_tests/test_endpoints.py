@@ -2,7 +2,7 @@
 
 import uuid
 from sqlalchemy import select
-from app.models.users import Users
+from app.db.models.users import Users
 from httpx import AsyncClient
 
 

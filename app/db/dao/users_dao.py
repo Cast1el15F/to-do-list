@@ -5,7 +5,7 @@ from sqlalchemy import select
 
 from app.schemas.user import UserSchema
 from app.db.dao.base_dao import BaseDAO
-from app.models.users import Users
+from app.db.models.users import Users
 from app.db.database import async_session_maker
 
 
@@ -34,9 +34,6 @@ class UsersDAO(BaseDAO):
                 user = await session.get(cls.model, id)
 
             if user is None and email is not None:
-                # query = select(cls.model).filter_by(email=email)
-                # result = await session.execute(query)
-                # user = result.scalar_one_or_none()
                 user = await cls.find_one_or_none(email=email)
 
             if user is None:

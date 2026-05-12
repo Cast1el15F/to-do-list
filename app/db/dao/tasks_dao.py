@@ -5,7 +5,7 @@ from sqlalchemy import select
 
 from app.schemas.tasks import TaskSchema
 from app.db.dao.base_dao import BaseDAO
-from app.models.tasks import Tasks
+from app.db.models.tasks import Tasks
 from app.db.database import async_session_maker
 
 
