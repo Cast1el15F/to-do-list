@@ -1,17 +1,23 @@
 [
     {
-        "name": "string0",
+        "id": 1,
+        "name": "string1",
         "description": "string000",
-        "status": "новая"
+        "status": "новая",
+        "user_id": 1
     },
     {
+        "id": 2,
         "name": "string1",
         "description": "string111",
-        "status": "новая"
+        "status": "новая",
+        "user_id": 1
     },
     {
+        "id": 3,
         "name": "string2",
         "description": "string222",
-        "status": "новая"
+        "status": "новая",
+        "user_id": 2
     }
 ]

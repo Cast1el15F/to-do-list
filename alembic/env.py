@@ -6,7 +6,8 @@ from sqlalchemy import pool
 from alembic import context
 
 from app.db.database import DB_URL, Base
-
+from app.db.dao.users_dao import UsersDAO
+from app.db.dao.tasks_dao import TasksDAO
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

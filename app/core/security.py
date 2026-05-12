@@ -4,11 +4,11 @@ from fastapi import Depends, HTTPException, Request
 from jose import jwt, JWTError
 from passlib.context import CryptContext
 from datetime import datetime, timedelta
-from app.api.models.user import User, UserSchema
+from app.schemas.user import User, UserSchema
 from app.core.config import settings
 from app.db.dao.users_dao import UsersDAO
 
-pwd_context = CryptContext(schemes=["pbkdf2_sha256"])
+pwd_context = CryptContext(schemes=["argon2"])
 
 
 async def get_password_hash(password: str) -> str:
@@ -27,9 +27,9 @@ async def authenticate_user(user_data: User) -> User:
     """Возвращает пользователя если он есть в бд"""
     user = await UsersDAO.find_one_or_none(email=user_data.email)
     if not user:
-        return None
+        raise HTTPException(status_code=404, detail="Пользователь не найден")
     if not await verify_password(user_data.password, user.password):
-        return None
+        raise HTTPException(status_code=401, detail="Неверный пароль")
     return user
 
 

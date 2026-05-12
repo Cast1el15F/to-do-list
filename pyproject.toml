@@ -15,15 +15,50 @@ dependencies = [
     "aiosqlite (>=0.22.1,<0.23.0)",
     "python-jose (>=3.5.0,<4.0.0)",
     "bcrypt (>=5.0.0,<6.0.0)",
-    "pytest (>=9.0.3,<10.0.0)",
+    "pydantic-settings (>=2.0.0,<3.0.0)",
     "pytest (>=9.0.3,<10.0.0)",
     "httpx (>=0.28.1,<0.29.0)",
     "fastapi[all] (>=0.136.1,<0.137.0)",
     "pytest-asyncio (>=1.3.0,<2.0.0)",
-    "ruff (>=0.15.12,<0.16.0)"
+    "ruff (>=0.15.12,<0.16.0)",
+    "argon2-cffi (>=25.1.0,<26.0.0)"
 ]
 
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+
+[tool.ruff]
+line-length = 88
+target-version = "py314"
+
+exclude = [
+    ".git",
+    ".venv",
+    "__pycache__",
+    "alembic/versions",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "F",   # pyflakes
+    "I",   # isort
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+    "SIM", # simplify
+]
+
+ignore = [
+    "B008", # Depends(), Query() и т.д. в FastAPI
+]
+
+[tool.ruff.lint.per-file-ignores]
+"alembic/env.py" = ["F401"]
+"tests/*" = ["S101"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"

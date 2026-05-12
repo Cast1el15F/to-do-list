@@ -2,16 +2,19 @@
     {
         "name": "string0",
         "email": "user0@example.com",
-        "password": "string0"
+        "password": "string0",
+        "admin": false
     },
     {
         "name": "string1",
         "email": "user1@example.com",
-        "password": "string1"
+        "password": "string1",
+        "admin": false
     },
     {
         "name": "string2",
         "email": "user2@example.com",
-        "password": "string2"
+        "password": "string2",
+        "admin": false
     }
 ]

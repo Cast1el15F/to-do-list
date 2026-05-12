@@ -16,7 +16,6 @@ class Task(BaseModel):
     name: str
     description: str
     status: Status = Status.new
-    # user_id: int
 
 
 class TaskSchema(Task):
